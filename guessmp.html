@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Личный сайт студента GeekBrains</title>
+	<link rel="stylesheet" href="style.css"> 
+	<script type="text/javascript">
+
+  	var answer = parseInt(Math.random() * 100); //генерит число
+  	var playerNumber = 1; //игра начинается с игрока под номером 1
+
+  	function readInt(){
+    	return document.getElementById("userAnswer").value;
+  	}
+
+  	function write(text){
+    	document.getElementById("info").innerHTML = text;
+  	}
+
+  	function hide(id) {
+    //document.getElementById(id).style.display = "none";
+    	document.getElementById(id).value = "";
+  	}
+
+  	function changePlayer(playerNumber) {
+    	if(playerNumber == 1) {
+      		playerNumber = 2;
+    	} else {
+      		playerNumber = 1;
+    	}
+    	return playerNumber;
+  	}
+
+  	function exit(){
+  		write("Игра завершена");
+  		hide("userAnswer");
+  		answer = parseInt(Math.random() * 100);
+  	}
+
+  	function win(){
+  		write("Поздравляю! Победил игрок " + playerNumber);
+  		hide("userAnswer");
+  		answer = parseInt(Math.random() * 100);
+  	}
+
+  	function guessmp(){
+    	var userAnswer = readInt();
+  		if(userAnswer == 'q'){
+			exit();
+		}
+    	if(userAnswer == answer) {
+      	win();
+    	} else if(userAnswer < answer) {
+    		playerNumber = changePlayer(playerNumber);
+    		write("Вы ввели слишком маленькое число.<br>Ход игрока под номером " + playerNumber);
+    		hide("userAnswer");
+    	} else if(userAnswer > answer) {
+    		playerNumber = changePlayer(playerNumber);
+    		write("Вы ввели слишком большое число.<br>Ход игрока под номером " + playerNumber);
+    		hide("userAnswer");
+    	}
+  	}
+
+	</script>
+	
+</head>
+<body>
+
+<div class="content">
+	<div class="header">
+		<a href="index.html">Главная</a>
+		<a href="puzzle.html">Загадки</a>
+		<a href="guess.html">Игра "Угадай-ка"</a>
+		<a href="#">Игра "Угадай-ка" мультиплеер</a>
+		<a href="password.html">Генератор паролей</a>
+	</div>
+
+<div class="contentWrap">
+    <div class="content">
+        <div class="center">
+
+			<h1>Игра "Угадай-ка" мультиплеер</h1>
+
+			<div class="box">
+
+				<p id="info">Угадайте число от 0 до 100 <br> Начинает игрок 1 <br> Для выхода нажмите 'q' <br> </p>
+				<input type="text" id="userAnswer">
+				<br>
+				<a href="#" onClick="guessmp();" id="button">Начать</a>				
+			</div>
+
+        </div>
+    </div>
+</div>
+
+	
+
+</div>
+<div class="footer">
+	Copyright &copy; Valeria Panferova
+<div>
+
+
+</body>
+</html>
